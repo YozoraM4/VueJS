@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="form-group">
+            <h1 v-if = "seen" v-bind:title="time">{{task}}</h1>
+            <label for="input">Tasks</label>
+            <input type="text" v-model= "task" placeholder="Write down your tasks here" class="form-control">
+        </div>
+        <button @click = "add" class="btn btn-success">Add</button>
+
+        <div>
+            <ol>
+                <li v-for="todo in todoList">{{todo}}</li>
+            </ol>
+        </div>
+    </div>
+
+
+<!-- JSScript -->
+    <script src="vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                task: '',
+                seen: true,
+                time: 'You loaded this page on ' + new Date().toLocaleString(),
+                todoList:["Ichi", "Ni", "San"]
+            },
+            methods:{
+                add: function() {
+                    if(this.task === '') {
+                        alert("Please Enter the Task.")
+                    } else {
+                        this.todoList.push(this.task)
+                        this.task = ''
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
